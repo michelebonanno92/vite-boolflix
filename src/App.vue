@@ -19,9 +19,7 @@ export default {
     AppHeader
   },
   methods: {
-    incrementCount() {
-      
-    }
+    
   }
 }
 </script>
