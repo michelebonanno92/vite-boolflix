@@ -7,6 +7,7 @@
 */
 // 1) Importazione del componente
 import AppHeader from './components/AppHeader.vue';
+import axios from 'axios';
 
 export default {
   data() {
@@ -29,8 +30,8 @@ export default {
     <!-- 3) Utilizzo del componente -->
     <AppHeader />
     
-    <main>
-    
+    <main class="p-t-2 https://app.diagrams.net/">
+      <input type="text" placeholder="Inserisci il tuo film">
     </main>
   </div>
 </template>
