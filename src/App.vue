@@ -28,24 +28,23 @@ export default {
 
       axios
       // oppure con il metodo più semplice
-      // .get('https://api.themoviedb.org/3/search/movie?api_key=' + this.apiKey + '&query=' + this.searchText) 
+      // .get('https://api.themoviedb.org/3/search/movie?api_key= ' + this.apiKey + '&query=' + this.searchText) 
+
+      
       .get('https://api.themoviedb.org/3/search/movie', {
         params : {
           api_key: this.apiKey,
           query: this.searchText,
-          console.log(this.searchText);
-          console.log(this.api_key)
         }
-      })
+    })
       console.log(this.searchText);
       console.log(this.api_key)
 
-
       .then((res) => {
-
+        console.log(res.results)
       });
 
-      console.log(res)
+     
     }
    
   }
