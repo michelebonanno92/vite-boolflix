@@ -15,9 +15,9 @@ export default {
       searchText:'',
       apiKey: 'c226b46bed5e65374d45ee2f2efb7ee9',
       movies: [] ,
-     
-    }
-  },
+      imgFlag: [ 'en.png', ],
+  }
+},
   // 2) Dichiarazione del componente
   components: {
     AppHeader
@@ -25,25 +25,31 @@ export default {
   methods: {
     search(){
       // oppure con il metodo più semplice
-      // .get('https://api.themoviedb.org/3/search/movie?api_key= ' + this.apiKey + '&query=' + this.searchText) 
-
       axios
-      .get('https://api.themoviedb.org/3/search/movie', {
-        params : {
-          api_key: this.apiKey,
-          query: this.searchText,
-        }
-    })
+      .get('https://api.themoviedb.org/3/search/movie?api_key=' + this.apiKey+'&query=' + this.searchText) 
+
+    //   axios
+    //   .get('https://api.themoviedb.org/3/search/movie', {
+    //     params : {
+    //       api_key: this.apiKey,
+    //       query: this.searchText,
+    //     }
+    // })
       .then((res) => {
-        // console.log(res);
-        console.log(res.data);
-        // console.log(res.data.results);
         this.movies = res.data.results;
       });
 
       this.searchText = '';
-    }
-   
+    },
+  }
+  ,
+  computed:{
+    changeToFlag(() => {
+      if (this.movies.original_language = 'en')
+      return this.imgFlag[en.png]
+  
+
+    })
   }
 }
 </script>
@@ -71,20 +77,25 @@ export default {
     </div>
 
     <div>
-      <ul v-for="(movie ,i) in movies">
-        <li >
-          Titolo : {{ movie.title }}
+      <ol>
+        <li v-for="(movie ,i) in movies" :key="i">
+          <ul>
+            <li >
+              Titolo : {{ movie.title }}
+            </li>
+            <li>
+              Titolo Originale: {{ movie.original_title }}
+            </li>
+            <li>
+              Lingua: {{ changeToFlag }}
+            </li>
+            <li>
+              Voto: {{ movie.vote_average }}
+            </li>
+            <hr>
+          </ul>
         </li>
-        <li>
-          Titolo Originale: {{ movie.original_title }}
-        </li>
-        <li>
-          Lingua: {{ movie.original_language }}
-        </li>
-        <li>
-          Voto: {{ movie.vote_average }}
-        </li>
-      </ul>
+      </ol>
     </div>
   
   
