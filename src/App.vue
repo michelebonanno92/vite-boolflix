@@ -14,6 +14,7 @@ export default {
     return { 
       searchText:'',
       apiKey: 'c226b46bed5e65374d45ee2f2efb7ee9',
+      movies: [] ,
      
     }
   },
@@ -23,28 +24,24 @@ export default {
   },
   methods: {
     search(){
-      console.log('cliccato sul bottone', this.searchText)
-      this.searchText = '',
-
-      axios
       // oppure con il metodo più semplice
       // .get('https://api.themoviedb.org/3/search/movie?api_key= ' + this.apiKey + '&query=' + this.searchText) 
 
-      
+      axios
       .get('https://api.themoviedb.org/3/search/movie', {
         params : {
           api_key: this.apiKey,
           query: this.searchText,
         }
     })
-      console.log(this.searchText);
-      console.log(this.api_key)
-
       .then((res) => {
-        console.log(res.results)
+        // console.log(res);
+        console.log(res.data);
+        // console.log(res.data.results);
+        this.movies = res.data.results;
       });
 
-     
+      this.searchText = '';
     }
    
   }
@@ -58,19 +55,36 @@ export default {
     
     <div class="d-flex justify-content-between p-20">
       <div>
-        <form @submit.prevent.enter="search">
+        <form @submit.prevent.enter="search()">
           <input  v-model="searchText" type="text" placeholder=" Insert your movie" class="text-center">
           <button  type="submit" class="btn btn-secondary">
             near
           </button>
         </form>
       </div>
-      <div>
+      <!-- <div>
         <input v-model="searchText" type="text" placeholder=" Insert your serie" class="text-center"  > 
-        <button @click.prevent="search" type="submit" class="btn btn-secondary">
+        <button @click.prevent="search()" type="submit" class="btn btn-secondary">
           near
         </button>
-      </div>
+      </div> -->
+    </div>
+
+    <div>
+      <ul v-for="(movie ,i) in movies">
+        <li >
+          Titolo : {{ movie.title }}
+        </li>
+        <li>
+          Titolo Originale: {{ movie.original_title }}
+        </li>
+        <li>
+          Lingua: {{ movie.original_language }}
+        </li>
+        <li>
+          Voto: {{ movie.vote_average }}
+        </li>
+      </ul>
     </div>
   
   
